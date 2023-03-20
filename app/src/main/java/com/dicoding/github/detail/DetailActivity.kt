@@ -13,9 +13,12 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import androidx.viewpager2.widget.ViewPager2
+import coil.load
 import com.dicoding.github.R
 import com.dicoding.github.data.local.DbModule
+import com.dicoding.github.data.model.DetailUserResponse
 import com.dicoding.github.data.model.UserGithubRespone
+import com.dicoding.github.databinding.ActivityDetailBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -25,28 +28,15 @@ import com.dicoding.github.detail.follow.FragmentFollow
 import java.lang.System.load
 
 
-private val ViewBinding.tab: TabLayout
-    get() {
-        TODO("Not yet implemented")
-    }
-private val ViewBinding.viewpager: ViewPager2
-    get() {
-        TODO("Not yet implemented")
-    }
-private val ViewBinding.btnFavorite: Any
-    get() {
-        TODO("Not yet implemented")
-    }
-
 class DetailActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityDetailBinding
     private val viewModel by viewModels<DetailViewModel> {
         DetailViewModel.Factory(DbModule(this))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
@@ -55,13 +45,23 @@ class DetailActivity : AppCompatActivity() {
 
         viewModel.resultDetailUser.observe(this) {
             when (it) {
+                is Result.Success<*> -> {
+                    val user = it.data as DetailUserResponse
+                    binding.image.load(user.avatarUrl) {
+                        transformations(CircleCropTransformation())
+                    }
+
+                    binding.nama.text = user.name
+                    binding.medsos.text = user.login
+                    binding.nolfol.text = user.following.toString()
+                    binding.nolfob.text = user.followers.toString()
+                }
                 is Result.Error -> {
                     Toast.makeText(this, it.exception.message.toString(), Toast.LENGTH_SHORT).show()
                 }
                 is Result.Loading -> {
                     binding.progressBar.isVisible = it.isLoading
                 }
-                else -> {}
             }
         }
         viewModel.getDetailUser(username)
@@ -101,24 +101,6 @@ class DetailActivity : AppCompatActivity() {
 
         viewModel.getFollowers(username)
 
-        viewModel.resultSuksesFavorite.observe(this) {
-            binding.btnFavorite.changeIconColor(R.color.red)
-        }
-
-        viewModel.resultDeleteFavorite.observe(this) {
-            binding.btnFavorite.changeIconColor(R.color.white)
-        }
-
-        binding.btnFavorite.setOnClickListener {
-            viewModel.setFavorite(item)
-        }
-
-        viewModel.findFavorite(item?.id ?: 0) {
-            binding.btnFavorite.changeIconColor(R.color.red)
-        }
-    }
-
-    private fun transformations(circleCropTransformation: CircleCropTransformation) {
 
     }
 
@@ -130,14 +112,6 @@ class DetailActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
-}
-
-private fun Any.setOnClickListener(function: () -> Unit) {
-    TODO("Not yet implemented")
-}
-
-private fun Any.changeIconColor(red: Int) {
-    TODO("Not yet implemented")
 }
 
 fun FloatingActionButton.changeIconColor(@ColorRes color: Int) {

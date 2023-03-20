@@ -19,7 +19,7 @@ android {
 
 
         buildConfigField("String", "API_URL", '"https://api.github.com/"')
-        buildConfigField("String", "TOKEN", '"token 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"')
+        buildConfigField("String", "TOKEN", '"token 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"')
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

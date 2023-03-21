@@ -6,4 +6,6 @@
     <string name="favorite">Favorite</string>
     <string name="setting">Setting</string>
     <string name="detail">Detail User Github</string>
+    <string name="textfol">Followers</string>
+    <string name="textfob">Following</string>
 </resources>

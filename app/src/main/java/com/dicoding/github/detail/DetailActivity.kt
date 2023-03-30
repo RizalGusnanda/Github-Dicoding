@@ -11,8 +11,6 @@ import coil.transform.CircleCropTransformation
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.viewbinding.ViewBinding
-import androidx.viewpager2.widget.ViewPager2
 import coil.load
 import com.dicoding.github.R
 import com.dicoding.github.data.local.DbModule
@@ -22,10 +20,8 @@ import com.dicoding.github.databinding.ActivityDetailBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import com.dicoding.github.databinding.ActivityMainBinding
 import com.dicoding.github.result.Result
 import com.dicoding.github.detail.follow.FragmentFollow
-import java.lang.System.load
 
 
 class DetailActivity : AppCompatActivity() {
@@ -53,8 +49,8 @@ class DetailActivity : AppCompatActivity() {
 
                     binding.nama.text = user.name
                     binding.medsos.text = user.login
-                    binding.nolfol.text = user.following.toString()
-                    binding.nolfob.text = user.followers.toString()
+                    binding.nolfol.text = user.followers.toString()
+                    binding.nolfob.text = user.following.toString()
                 }
                 is Result.Error -> {
                     Toast.makeText(this, it.exception.message.toString(), Toast.LENGTH_SHORT).show()

@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
 import coil.transform.CircleCropTransformation
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -97,6 +98,21 @@ class DetailActivity : AppCompatActivity() {
 
         viewModel.getFollowers(username)
 
+        viewModel.resultSuksesFavorite.observe(this) {
+            binding.btnFavorite.changeIcon(R.drawable.baseline_favorite_24)
+        }
+
+        viewModel.resultDeleteFavorite.observe(this) {
+            binding.btnFavorite.changeIcon(R.drawable.baseline_favorite_border_24)
+        }
+
+        binding.btnFavorite.setOnClickListener {
+            viewModel.setFavorite(item)
+        }
+
+        viewModel.findFavorite(item?.id ?: 0) {
+            binding.btnFavorite.changeIcon(R.drawable.baseline_favorite_24)
+        }
 
     }
 
@@ -112,4 +128,7 @@ class DetailActivity : AppCompatActivity() {
 
 fun FloatingActionButton.changeIconColor(@ColorRes color: Int) {
     imageTintList = ColorStateList.valueOf(ContextCompat.getColor(this.context, color))
+}
+fun FloatingActionButton.changeIcon(@DrawableRes drawableRes: Int) {
+    this.setImageDrawable(ContextCompat.getDrawable(this.context, drawableRes))
 }

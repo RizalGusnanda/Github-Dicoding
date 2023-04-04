@@ -1,5 +1,6 @@
 package com.dicoding.github.data.remote
 
+import com.dicoding.github.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -14,12 +15,13 @@ object ApiConfig {
             loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
             addInterceptor(loggingInterceptor)
         }
-        .readTimeout(25,TimeUnit.SECONDS)
-        .writeTimeout(300,TimeUnit.SECONDS)
-        .connectTimeout(60,TimeUnit.SECONDS)
+        .readTimeout(25, TimeUnit.SECONDS)
+        .writeTimeout(300, TimeUnit.SECONDS)
+        .connectTimeout(60, TimeUnit.SECONDS)
         .build()
+
     private val retrofit = Retrofit.Builder()
-        .baseUrl("https://api.github.com/")
+        .baseUrl(BuildConfig.API_URL)
         .client(okhttp)
         .addConverterFactory(GsonConverterFactory.create())
         .build()

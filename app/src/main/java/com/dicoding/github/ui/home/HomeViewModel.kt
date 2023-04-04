@@ -1,8 +1,7 @@
-package com.dicoding.github
+package com.dicoding.github.ui.home
 
-import android.app.usage.UsageEvents
-import android.util.Log
 import androidx.lifecycle.*
+import com.dicoding.github.data.local.SettingPreferences
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import com.dicoding.github.data.remote.ApiConfig
@@ -11,11 +10,13 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onStart
 
-class MainViewModel() : ViewModel() {
+class HomeViewModel(private val preferences: SettingPreferences) : ViewModel() {
 
     val resultUser = MutableLiveData<Result>()
 
-    fun getUser() {
+    fun getTheme(): LiveData<Boolean> = preferences.getThemeSetting().asLiveData()
+
+    fun getUser(theme: Boolean) {
         viewModelScope.launch {
             flow {
                 val response = ApiConfig
@@ -60,5 +61,12 @@ class MainViewModel() : ViewModel() {
                 resultUser.value = Result.Success(it.items)
             }
         }
+    }
+
+    class Factory(private val preferences: SettingPreferences) :
+        ViewModelProvider.NewInstanceFactory() {
+
+        override fun <T : ViewModel> create(modelClass: Class<T>): T =
+            HomeViewModel(preferences) as T
     }
 }

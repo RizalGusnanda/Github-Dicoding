@@ -25,10 +25,9 @@ interface ApiService {
         authorization: String = BuildConfig.TOKEN
     ): DetailUserResponse
 
-
     @JvmSuppressWildcards
     @GET("/users/{username}/followers")
-    suspend fun getFollowers(
+    suspend fun getFollowersUserGithub(
         @Path("username") username: String,
         @Header("Authorization")
         authorization: String = BuildConfig.TOKEN
@@ -36,7 +35,7 @@ interface ApiService {
 
     @JvmSuppressWildcards
     @GET("/users/{username}/following")
-    suspend fun getFollowing(
+    suspend fun getFollowingUserGithub(
         @Path("username") username: String,
         @Header("Authorization")
         authorization: String = BuildConfig.TOKEN

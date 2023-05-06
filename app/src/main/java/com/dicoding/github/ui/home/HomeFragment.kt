@@ -4,24 +4,18 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.github.GithubAdapter
-import com.dicoding.github.ui.home.HomeViewModel
-import com.dicoding.github.R
 import com.dicoding.github.data.local.SettingPreferences
 import com.dicoding.github.data.model.UserGithubRespone
 import com.dicoding.github.databinding.FragmentHomeBinding
 import com.dicoding.github.detail.DetailActivity
-import com.dicoding.github.ui.favorite.FavoriteFragment
 import com.dicoding.github.result.Result
-import com.dicoding.github.ui.setting.SettingFragment
 
 class HomeFragment : Fragment() {
 

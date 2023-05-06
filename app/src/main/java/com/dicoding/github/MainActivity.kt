@@ -7,7 +7,6 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.dicoding.github.R
 import com.dicoding.github.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

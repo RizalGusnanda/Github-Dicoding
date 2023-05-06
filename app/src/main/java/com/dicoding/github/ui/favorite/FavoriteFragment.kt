@@ -3,7 +3,6 @@ package com.dicoding.github.ui.favorite
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
@@ -13,7 +12,6 @@ import com.dicoding.github.GithubAdapter
 import com.dicoding.github.data.local.DbModule
 import com.dicoding.github.databinding.FragmentFavoriteBinding
 import com.dicoding.github.detail.DetailActivity
-import com.dicoding.github.ui.favorite.FavoriteViewModel
 
 class FavoriteFragment : Fragment() {
 

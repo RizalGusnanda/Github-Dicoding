@@ -20,10 +20,11 @@
         android:id="@+id/switchTheme"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
         android:text="Light Theme"
         android:textOff="Light Theme"
         android:textOn="Dark Theme"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="60dp"
         app:layout_constraintStart_toEndOf="@+id/themeLabel"
         app:layout_constraintTop_toTopOf="parent" />
 

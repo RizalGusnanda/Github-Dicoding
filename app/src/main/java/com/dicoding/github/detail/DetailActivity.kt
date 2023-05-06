@@ -1,12 +1,10 @@
 package com.dicoding.github.detail
 
-import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
-import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import coil.transform.CircleCropTransformation
 import androidx.appcompat.app.AppCompatActivity
@@ -126,9 +124,6 @@ class DetailActivity : AppCompatActivity() {
     }
 }
 
-fun FloatingActionButton.changeIconColor(@ColorRes color: Int) {
-    imageTintList = ColorStateList.valueOf(ContextCompat.getColor(this.context, color))
-}
 fun FloatingActionButton.changeIcon(@DrawableRes drawableRes: Int) {
     this.setImageDrawable(ContextCompat.getDrawable(this.context, drawableRes))
 }
